@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SmartLock" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Màu chính -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Màu phụ -->
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/orange_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Màu nền -->
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:statusBarColor">@color/background_dark</item>
+
+        <!-- Màu CardView -->
+        <item name="cardBackground">@color/bg_card_dark</item>
+
+        <!-- Màu chữ mặc định -->
+        <item name="android:textColorPrimary">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+
+        <!-- Material Components -->
+        <item name="materialButtonStyle">@style/Widget.App.Button.Dark</item>
+    </style>
+
+    <style name="Widget.App.Button.Dark" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/blue</item>
+        <item name="cornerRadius">28dp</item>
+    </style>
+</resources>

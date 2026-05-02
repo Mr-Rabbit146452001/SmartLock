@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@drawable/bg_gradient_white">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="48dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SMART LOCK"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="ĐĂNG XUẤT"
+            android:textColor="@color/blue"
+            android:background="@drawable/button_blue"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"/>
+
+    </LinearLayout>
+
+    <!-- Trạng thái khóa -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRẠNG THÁI CỬA"
+        android:textColor="@color/text_secondary_light"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tv_lock_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ĐÃ KHÓA"
+        android:textColor="@color/error"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Nút điều khiển chính -->
+    <Button
+        android:id="@+id/btn_control"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:text="🔒"
+        android:textSize="80sp"
+        android:background="@drawable/control_button_white"
+        android:textColor="@color/blue"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@null"/>
+
+    <!-- Nhãn chức năng nút điều khiển -->
+    <TextView
+        android:id="@+id/tv_control_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NHẤN ĐỂ MỞ KHÓA"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Thông tin bổ sung -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LẦN MỞ GẦN NHẤT"
+        android:textColor="@color/text_secondary_dark"
+        android:textSize="12sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tv_last_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chưa có dữ liệu"
+        android:textColor="@color/text_primary_dark"
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Các nút chức năng -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_manage_users"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="👥 QUẢN LÝ\nNGƯỜI DÙNG"
+            android:background="@drawable/button_outline_blue"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:backgroundTint="@null"/>
+
+        <Button
+            android:id="@+id/btn_history"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="📜 LỊCH SỬ\nHOẠT ĐỘNG"
+            android:background="@drawable/button_outline_blue"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:backgroundTint="@null"/>
+
+        <Button
+            android:id="@+id/btn_settings"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="⚙️ CÀI ĐẶT"
+            android:background="@drawable/button_outline_blue"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:backgroundTint="@null"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

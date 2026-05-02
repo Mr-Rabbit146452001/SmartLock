@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/background_light">
+
+    <TextView
+        android:id="@+id/tv_device_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart Lock Pro"
+        android:textColor="@color/blue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tv_device_serial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SL-001-2024"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:layout_marginBottom="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NHẬP MÃ PIN THIẾT BỊ"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tv_pin_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="● ● ● ● ● ●"
+        android:textColor="@color/text_primary"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.2"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/error"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:layout_marginBottom="32dp" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="4">
+
+        <Button android:id="@+id/btn_1" android:text="1" style="@style/PinButton" />
+        <Button android:id="@+id/btn_2" android:text="2" style="@style/PinButton" />
+        <Button android:id="@+id/btn_3" android:text="3" style="@style/PinButton" />
+        <Button android:id="@+id/btn_4" android:text="4" style="@style/PinButton" />
+        <Button android:id="@+id/btn_5" android:text="5" style="@style/PinButton" />
+        <Button android:id="@+id/btn_6" android:text="6" style="@style/PinButton" />
+        <Button android:id="@+id/btn_7" android:text="7" style="@style/PinButton" />
+        <Button android:id="@+id/btn_8" android:text="8" style="@style/PinButton" />
+        <Button android:id="@+id/btn_9" android:text="9" style="@style/PinButton" />
+        <Button android:id="@+id/btn_clear" android:text="⌫" style="@style/PinButton" />
+        <Button android:id="@+id/btn_0" android:text="0" style="@style/PinButton" />
+        <Button android:id="@+id/btn_confirm" android:text="✓" style="@style/PinButtonConfirm" />
+
+    </GridLayout>
+
+</LinearLayout>
