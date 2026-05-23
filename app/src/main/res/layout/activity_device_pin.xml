@@ -5,14 +5,14 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="32dp"
-    android:background="@color/background_light">
+    android:background="@drawable/bg_gradient_white">
 
     <TextView
         android:id="@+id/tv_device_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Smart Lock Pro"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="← Quay lại"
-        android:textColor="@color/blue"
+        android:textColor="@color/light_cyan"
         android:textSize="14sp"
         android:layout_gravity="center"
         android:layout_marginTop="28dp" />

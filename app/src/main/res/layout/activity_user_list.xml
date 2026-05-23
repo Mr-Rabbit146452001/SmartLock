@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
-    android:background="@color/background">
+    android:background="@drawable/bg_gradient_white">
 
     <!-- Header -->
     <LinearLayout
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="10"
             android:text="👥 QUẢN LÝ NGƯỜI DÙNG"
-            android:textColor="@color/blue"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center" />

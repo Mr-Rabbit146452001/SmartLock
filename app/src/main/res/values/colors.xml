@@ -20,14 +20,14 @@
     <color name="pastel_blue">#AEC6CF</color>
 
     <!-- Màu nền -->
-    <color name="background">#FFFFFF</color>
-    <color name="background_gray">#F8F9FA</color>
-    <color name="bg_card">#1E1E1E</color>
+    <color name="background">#0A192F</color>
+    <color name="background_gray">#0F172A</color>
+    <color name="bg_card">#172A45</color>
 
     <!-- Màu chữ -->
-    <color name="text_primary">#1A1A2E</color>
-    <color name="text_secondary">#6C757D</color>
-    <color name="text_hint">#ADB5BD</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_hint">#64748B</color>
 
     <!-- Màu trạng thái -->
     <color name="success">#4CD964</color>
@@ -35,14 +35,14 @@
     <color name="warning">#FF9500</color>
 
     <!-- Màu nền trạng thái tối -->
-    <color name="background_light">#FFFFFF</color>
-    <color name="background_dark">#121212</color>
-    <color name="bg_card_light">#F5F5F5</color>
-    <color name="bg_card_dark">#1E1E1E</color>
-    <color name="text_primary_light">#1A1A2E</color>
+    <color name="background_light">#0A192F</color>
+    <color name="background_dark">#0A192F</color>
+    <color name="bg_card_light">#172A45</color>
+    <color name="bg_card_dark">#172A45</color>
+    <color name="text_primary_light">#FFFFFF</color>
     <color name="text_primary_dark">#FFFFFF</color>
-    <color name="text_secondary_light">#6C757D</color>
-    <color name="text_secondary_dark">#9E9E9E</color>
-    <color name="text_hint_light">#ADB5BD</color>
+    <color name="text_secondary_light">#94A3B8</color>
+    <color name="text_secondary_dark">#94A3B8</color>
+    <color name="text_hint_light">#64748B</color>
 
 </resources>
