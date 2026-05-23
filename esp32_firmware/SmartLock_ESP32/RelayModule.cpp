@@ -17,14 +17,20 @@ void openDoor(String method) {
   digitalWrite(BUZZER_PIN, LOW);
   
   digitalWrite(RELAY_PIN, LOW); // Kích relay mở chốt
-  updateDoorStatus("UNLOCKED"); // Gửi trạng thái lên App
+  updateDoorStatus(false);      // Gửi trạng thái MỞ (isLocked = false) lên Firebase
   
   delay(5000); // Giữ trong 5 giây
   
   digitalWrite(RELAY_PIN, HIGH); // Đóng lại
-  updateDoorStatus("LOCKED");   // Cập nhật lại trạng thái khóa
+  updateDoorStatus(true);        // Gửi trạng thái KHÓA (isLocked = true) lên Firebase
   
   Serial.println("Cua da duoc khoa lai.\n");
+}
+
+void lockDoor() {
+  digitalWrite(RELAY_PIN, HIGH); // Tắt relay (khóa chốt)
+  updateDoorStatus(true);        // Cập nhật trạng thái KHÓA lên Firebase
+  Serial.println("=> CUA DA DUOC KHOA LAP TUC.");
 }
 
 void accessDenied() {

@@ -55,23 +55,29 @@ void Firebase_Init() {
 
 void checkFirebaseCommand() {
   if (Firebase.ready() && signupOK) {
-    // Đọc trạng thái từ nhánh SmartLock/Command/Unlock
-    if (Firebase.RTDB.getString(&fbdo, "SmartLock/Command/Unlock")) {
-      if (fbdo.dataType() == "string") {
-        String command = fbdo.stringData();
-        if (command == "FACE_UNLOCK" || command == "APP_UNLOCK") {
-          // Xóa lệnh sau khi đọc (tránh lặp lại lệnh cũ)
-          Firebase.RTDB.setString(&fbdo, "SmartLock/Command/Unlock", "IDLE");
-          
-          openDoor("Mo cua tu App (Firebase: " + command + ")");
-        }
+    // 1. Kiểm tra lệnh MỞ KHÓA (command/unlock)
+    if (Firebase.RTDB.getBool(&fbdo, "command/unlock")) {
+      if (fbdo.dataType() == "boolean" && fbdo.boolData() == true) {
+        // Reset lại lệnh về false để tránh lặp lệnh
+        Firebase.RTDB.setBool(&fbdo, "command/unlock", false);
+        openDoor("App Android (Firebase Unlock)");
+      }
+    }
+
+    // 2. Kiểm tra lệnh KHÓA CỬA LẬP TỨC (command/lock)
+    if (Firebase.RTDB.getBool(&fbdo, "command/lock")) {
+      if (fbdo.dataType() == "boolean" && fbdo.boolData() == true) {
+        // Reset lại lệnh về false
+        Firebase.RTDB.setBool(&fbdo, "command/lock", false);
+        lockDoor();
       }
     }
   }
 }
 
-void updateDoorStatus(String status) {
+void updateDoorStatus(bool isLocked) {
   if (Firebase.ready() && signupOK) {
-    Firebase.RTDB.setString(&fbdo, "SmartLock/Status/Door", status);
+    // Cập nhật trạng thái khóa dạng Boolean lên nhánh door/isLocked
+    Firebase.RTDB.setBool(&fbdo, "door/isLocked", isLocked);
   }
 }

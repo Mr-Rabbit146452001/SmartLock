@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smartlock">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,6 +48,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <!-- Face Unlock Activity -->
+        <activity
+            android:name=".FaceUnlockActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <!-- Home Activity (Điều khiển khóa) -->
         <activity

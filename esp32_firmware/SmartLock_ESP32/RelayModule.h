@@ -4,6 +4,7 @@
 
 void Relay_Init();
 void openDoor(String method);
+void lockDoor();
 void accessDenied();
 
 #endif

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121824"
+    android:padding="24dp">
+
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_revert"
+        android:tint="@color/white"
+        android:contentDescription="Quay lại" />
+
+    <!-- Title and Description -->
+    <LinearLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@id/btn_back"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XÁC THỰC KHUÔN MẶT"
+            android:textColor="#38bdf8"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:id="@+id/tv_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vui lòng đưa khuôn mặt vào chính giữa camera"
+            android:textColor="#94a3b8"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Camera Circle Viewport -->
+    <FrameLayout
+        android:id="@+id/camera_container"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent">
+
+        <!-- Outer scanning circular rings (pulse effect) -->
+        <View
+            android:id="@+id/view_pulse1"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center"
+            android:background="@drawable/face_scanner_ring" />
+
+        <View
+            android:id="@+id/view_pulse2"
+            android:layout_width="270dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center"
+            android:background="@drawable/face_scanner_ring"
+            android:alpha="0.5" />
+
+        <!-- Camera Preview Frame -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="120dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="#1e293b">
+
+            <SurfaceView
+                android:id="@+id/surfaceView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Dynamic Laser Scanning Line -->
+        <View
+            android:id="@+id/view_scan_line"
+            android:layout_width="240dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#38bdf8"
+            android:layout_marginTop="20dp" />
+
+    </FrameLayout>
+
+    <!-- Futuristic Text Status -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/camera_container"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp">
+
+        <ProgressBar
+            android:id="@+id/pb_scanning"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="4dp"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progressTint="#38bdf8"
+            android:max="100"
+            android:progress="0"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ĐANG PHÂN TÍCH..."
+            android:textColor="#38bdf8"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05" />
+
+        <TextView
+            android:id="@+id/tv_security_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kết nối dữ liệu mã hóa AES-256"
+            android:textColor="#475569"
+            android:textSize="11sp"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+</RelativeLayout>

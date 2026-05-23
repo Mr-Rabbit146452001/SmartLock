@@ -5,6 +5,6 @@
 
 void Firebase_Init();
 void checkFirebaseCommand();
-void updateDoorStatus(String status);
+void updateDoorStatus(bool isLocked);
 
 #endif
