@@ -28,9 +28,9 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // 1. Đổi mã PIN
-        Button btnChangePin = findViewById(R.id.btn_change_pin);
-        btnChangePin.setOnClickListener(v -> showChangePinDialog());
+        // 1. Đổi mã PIN (Nhấn trực tiếp vào CardView)
+        androidx.cardview.widget.CardView cardChangePin = findViewById(R.id.card_change_pin);
+        cardChangePin.setOnClickListener(v -> showChangePinDialog());
 
         // 1b. Chọn thiết bị (Nằm trong phần bảo mật)
         androidx.cardview.widget.CardView cardSelectDevice = findViewById(R.id.card_select_device);
