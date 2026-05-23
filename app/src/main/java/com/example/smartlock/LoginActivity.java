@@ -32,13 +32,26 @@ public class LoginActivity extends AppCompatActivity {
 
         initViews();
         setupListeners();
-        setDefaultValues();
 
         // Kiểm tra đã đăng nhập chưa
         if (firebaseManager.getCurrentUser() != null) {
             // Đã đăng nhập, chuyển thẳng vào màn hình chính
             startActivity(new Intent(this, MainActivity.class));
             finish();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Xóa sạch kí tự cũ / rác trong các ô nhập liệu khi vào lại màn hình này
+        if (edtEmail != null) edtEmail.setText("");
+        if (edtPassword != null) edtPassword.setText("");
+        
+        // Trả nút đăng nhập về trạng thái bình thường
+        if (btnLogin != null) {
+            btnLogin.setText("ĐĂNG NHẬP");
+            btnLogin.setEnabled(true);
         }
     }
 
