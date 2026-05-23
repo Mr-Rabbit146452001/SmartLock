@@ -1,5 +1,8 @@
 package com.example.smartlock;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.*;
@@ -27,9 +30,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         // 1. Đổi mã PIN
         Button btnChangePin = findViewById(R.id.btn_change_pin);
-        btnChangePin.setOnClickListener(v -> {
-            // TODO: Mở dialog đổi PIN
-            Toast.makeText(this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show();
+        btnChangePin.setOnClickListener(v -> showChangePinDialog());
+
+        // 1b. Chọn thiết bị (Nằm trong phần bảo mật)
+        androidx.cardview.widget.CardView cardSelectDevice = findViewById(R.id.card_select_device);
+        cardSelectDevice.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, DeviceListActivity.class);
+            startActivity(intent);
         });
 
         // 2. Ngưỡng cảnh báo
@@ -48,11 +55,6 @@ public class SettingsActivity extends AppCompatActivity {
         ArrayAdapter<String> attemptsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, attempts);
         attemptsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMaxAttempts.setAdapter(attemptsAdapter);
-
-        // 5. Quản lý thiết bị
-        EditText edtDeviceName = findViewById(R.id.edt_device_name);
-        TextView tvSerial = findViewById(R.id.tv_serial);
-        TextView tvEsp32Status = findViewById(R.id.tv_esp32_status);
 
         // 6. Chế độ hoạt động
         RadioGroup rgMode = findViewById(R.id.rg_mode);
@@ -124,5 +126,67 @@ public class SettingsActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         recreate();
+    }
+
+    private void showChangePinDialog() {
+        SharedPreferences sharedPref = getSharedPreferences("SmartLockPrefs", Context.MODE_PRIVATE);
+        String deviceId = sharedPref.getString("last_device_id", null);
+        String userId = FirebaseManager.getInstance().getCurrentUserId();
+
+        if (deviceId == null || userId == null) {
+            Toast.makeText(this, "Không tìm thấy thông tin thiết bị hoặc tài khoản!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Tạo EditText nhập PIN mới dạng bàn phím số
+        final EditText input = new EditText(this);
+        input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        input.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance()); // Ẩn kí tự bằng dấu chấm bảo mật
+        input.setFilters(new android.text.InputFilter[]{new android.text.InputFilter.LengthFilter(6)});
+        input.setHint("Nhập 6 chữ số mới");
+        input.setGravity(android.view.Gravity.CENTER);
+        
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(60, 40, 60, 20);
+        layout.addView(input);
+
+        androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Thay đổi mã PIN")
+                .setMessage("Nhập mã PIN 6 chữ số mới cho thiết bị hiện tại:")
+                .setView(layout)
+                .setPositiveButton("XÁC NHẬN", null) // Bấm xác nhận để kiểm tra độ dài trước khi dismiss
+                .setNegativeButton("HỦY", (dialogInterface, i) -> dialogInterface.dismiss())
+                .create();
+
+        dialog.show();
+
+        // Xử lý kiểm tra dữ liệu trước khi lưu
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
+            String newPin = input.getText().toString().trim();
+            if (newPin.length() != 6) {
+                input.setError("Mã PIN phải đủ 6 chữ số!");
+                return;
+            }
+
+            // Hashing mã PIN mới
+            String pinHash = com.example.smartlock.utils.EncryptionHelper.hashPin(newPin);
+
+            // Cập nhật mã PIN lên Firebase Database
+            FirebaseManager.getInstance().getDatabaseRef()
+                    .child("users")
+                    .child(userId)
+                    .child("devices")
+                    .child(deviceId)
+                    .child("pinHash")
+                    .setValue(pinHash)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(SettingsActivity.this, "✅ Thay đổi mã PIN thành công!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(SettingsActivity.this, "❌ Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        });
     }
 }
