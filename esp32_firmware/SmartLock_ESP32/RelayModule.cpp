@@ -1,5 +1,6 @@
 #include "RelayModule.h"
 #include "Config.h"
+#include "FirebaseModule.h" // Thêm thư viện để cập nhật trạng thái lên Firebase
 
 void Relay_Init() {
   pinMode(RELAY_PIN, OUTPUT);
@@ -16,8 +17,12 @@ void openDoor(String method) {
   digitalWrite(BUZZER_PIN, LOW);
   
   digitalWrite(RELAY_PIN, LOW); // Kích relay mở chốt
+  updateDoorStatus("UNLOCKED"); // Gửi trạng thái lên App
+  
   delay(5000); // Giữ trong 5 giây
+  
   digitalWrite(RELAY_PIN, HIGH); // Đóng lại
+  updateDoorStatus("LOCKED");   // Cập nhật lại trạng thái khóa
   
   Serial.println("Cua da duoc khoa lai.\n");
 }

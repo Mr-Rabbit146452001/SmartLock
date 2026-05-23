@@ -3,7 +3,7 @@
 #include "RelayModule.h"
 #include "KeypadModule.h"
 #include "FingerprintModule.h"
-#include "BluetoothModule.h"
+#include "FirebaseModule.h"
 
 void setup() {
   Serial.begin(115200);
@@ -13,11 +13,11 @@ void setup() {
   Relay_Init();
   Keypad_Init();
   Fingerprint_Init();
-  Bluetooth_Init();
+  Firebase_Init();
 }
 
 void loop() {
   checkKeypad();
   checkFingerprint();
-  checkAppCommand();
+  checkFirebaseCommand();
 }
