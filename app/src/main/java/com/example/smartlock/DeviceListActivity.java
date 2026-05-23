@@ -20,7 +20,7 @@ import java.util.List;
 public class DeviceListActivity extends AppCompatActivity {
 
     private ListView lvDevices;
-    private TextView tvEmpty;
+    private TextView tvEmpty, tvBack;
     private Button btnAddDevice;
     private List<Device> deviceList;
     private DeviceAdapter adapter;
@@ -47,6 +47,7 @@ public class DeviceListActivity extends AppCompatActivity {
         lvDevices = findViewById(R.id.lv_devices);
         tvEmpty = findViewById(R.id.tv_empty);
         btnAddDevice = findViewById(R.id.btn_add_device);
+        tvBack = findViewById(R.id.tv_back);
         deviceList = new ArrayList<>();
     }
 
@@ -102,5 +103,6 @@ public class DeviceListActivity extends AppCompatActivity {
             Intent intent = new Intent(DeviceListActivity.this, AddDeviceActivity.class);
             startActivity(intent);
         });
+        tvBack.setOnClickListener(v -> finish());
     }
 }

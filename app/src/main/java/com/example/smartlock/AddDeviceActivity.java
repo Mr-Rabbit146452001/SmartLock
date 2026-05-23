@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.smartlock.models.Device;
@@ -13,6 +14,7 @@ public class AddDeviceActivity extends AppCompatActivity {
 
     private EditText edtDeviceName, edtDeviceSerial, edtPin;
     private Button btnAdd;
+    private TextView tvBack;
     private FirebaseManager firebaseManager;
 
     @Override
@@ -31,10 +33,12 @@ public class AddDeviceActivity extends AppCompatActivity {
         edtDeviceSerial = findViewById(R.id.edt_device_serial);
         edtPin = findViewById(R.id.edt_pin);
         btnAdd = findViewById(R.id.btn_add);
+        tvBack = findViewById(R.id.tv_back);
     }
 
     private void setupListeners() {
         btnAdd.setOnClickListener(v -> addDevice());
+        tvBack.setOnClickListener(v -> finish());
     }
 
     private void addDevice() {

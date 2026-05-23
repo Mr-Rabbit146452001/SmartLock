@@ -11,7 +11,7 @@ import com.example.smartlock.utils.EncryptionHelper;
 
 public class DevicePinActivity extends AppCompatActivity {
 
-    private TextView tvDeviceName, tvDeviceSerial, tvPinDisplay, tvError;
+    private TextView tvDeviceName, tvDeviceSerial, tvPinDisplay, tvError, tvBack;
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Button btnClear, btnConfirm;
 
@@ -55,6 +55,7 @@ public class DevicePinActivity extends AppCompatActivity {
         btn9 = findViewById(R.id.btn_9);
         btnClear = findViewById(R.id.btn_clear);
         btnConfirm = findViewById(R.id.btn_confirm);
+        tvBack = findViewById(R.id.tv_back);
     }
 
     private void setupListeners() {
@@ -78,6 +79,7 @@ public class DevicePinActivity extends AppCompatActivity {
         });
 
         btnConfirm.setOnClickListener(v -> verifyPin());
+        tvBack.setOnClickListener(v -> finish());
     }
 
     private void addDigit(char digit) {
