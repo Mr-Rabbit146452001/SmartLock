@@ -36,6 +36,7 @@ public class FaceUnlockActivity extends AppCompatActivity implements SurfaceHold
     private ProgressBar pbScanning;
     private TextView tvStatus, tvInstruction;
     private ImageButton btnBack;
+    private String deviceId, deviceName;
     
     private ObjectAnimator scanAnimator;
     private ObjectAnimator pulseAnimator1, pulseAnimator2;
@@ -46,6 +47,9 @@ public class FaceUnlockActivity extends AppCompatActivity implements SurfaceHold
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_unlock);
+
+        deviceId = getIntent().getStringExtra("device_id");
+        deviceName = getIntent().getStringExtra("device_name");
 
         initViews();
         setupListeners();
@@ -163,8 +167,8 @@ public class FaceUnlockActivity extends AppCompatActivity implements SurfaceHold
                     
                     // Chuyển trực tiếp sang HomeActivity
                     Intent intent = new Intent(FaceUnlockActivity.this, HomeActivity.class);
-                    intent.putExtra("device_id", "default_device");
-                    intent.putExtra("device_name", "Smart Lock ESP32");
+                    intent.putExtra("device_id", deviceId);
+                    intent.putExtra("device_name", deviceName);
                     startActivity(intent);
                     finish();
                 })

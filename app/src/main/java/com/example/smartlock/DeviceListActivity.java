@@ -80,11 +80,12 @@ public class DeviceListActivity extends AppCompatActivity {
 
                             lvDevices.setOnItemClickListener((parent, view, position, id) -> {
                                 Device selectedDevice = deviceList.get(position);
-                                Intent intent = new Intent(DeviceListActivity.this, DevicePinActivity.class);
+                                Intent intent = new Intent(DeviceListActivity.this, MainActivity.class);
                                 intent.putExtra("device_id", selectedDevice.getDeviceId());
                                 intent.putExtra("device_name", selectedDevice.getDeviceName());
                                 intent.putExtra("device_serial", selectedDevice.getDeviceSerial());
                                 startActivity(intent);
+                                finish(); // Đóng màn hình chọn thiết bị sau khi chọn
                             });
                         }
                     }

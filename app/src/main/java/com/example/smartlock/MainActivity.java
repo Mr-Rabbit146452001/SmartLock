@@ -1,6 +1,8 @@
 package com.example.smartlock;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import java.util.concurrent.Executor;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnFingerprint, btnFace, btnPin;
+    private String deviceId, deviceName, deviceSerial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +35,50 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // Đọc thông tin thiết bị từ Intent
+        deviceId = getIntent().getStringExtra("device_id");
+        deviceName = getIntent().getStringExtra("device_name");
+        deviceSerial = getIntent().getStringExtra("device_serial");
+
+        SharedPreferences sharedPref = getSharedPreferences("SmartLockPrefs", Context.MODE_PRIVATE);
+
+        if (deviceId != null) {
+            // Lưu vào SharedPreferences để dùng cho các lần mở app sau
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("last_device_id", deviceId);
+            editor.putString("last_device_name", deviceName);
+            editor.putString("last_device_serial", deviceSerial);
+            editor.apply();
+        } else {
+            // Tải lại thiết bị cuối cùng đã chọn
+            deviceId = sharedPref.getString("last_device_id", null);
+            deviceName = sharedPref.getString("last_device_name", null);
+            deviceSerial = sharedPref.getString("last_device_serial", null);
+        }
+
+        // Nếu chưa từng chọn thiết bị nào (ví dụ tài khoản mới tinh), đưa họ qua màn hình chọn thiết bị
+        if (deviceId == null) {
+            startActivity(new Intent(MainActivity.this, DeviceListActivity.class));
+            finish();
+            return;
+        }
+
         setupFingerprintUnlock();
 
         btnFace.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, FaceUnlockActivity.class));
+            Intent intent = new Intent(MainActivity.this, FaceUnlockActivity.class);
+            intent.putExtra("device_id", deviceId);
+            intent.putExtra("device_name", deviceName);
+            startActivity(intent);
         });
 
         btnPin.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, DeviceListActivity.class));
+            // Nhấn MÃ PIN sẽ đi thẳng tới màn hình nhập PIN, không đi qua danh sách thiết bị
+            Intent intent = new Intent(MainActivity.this, DevicePinActivity.class);
+            intent.putExtra("device_id", deviceId);
+            intent.putExtra("device_name", deviceName);
+            intent.putExtra("device_serial", deviceSerial);
+            startActivity(intent);
         });
     }
 
@@ -77,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
                             
                             // Chuyển trực tiếp sang HomeActivity
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                            intent.putExtra("device_id", "default_device");
-                            intent.putExtra("device_name", "Smart Lock ESP32");
+                            intent.putExtra("device_id", deviceId);
+                            intent.putExtra("device_name", deviceName);
                             startActivity(intent);
                             finish();
                         })
